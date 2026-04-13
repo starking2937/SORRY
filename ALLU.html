@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom, #ffd6e0, #fff);
+  overflow: hidden;
+  text-align: center;
+  animation: fadeIn 2s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.container {
+  position: relative;
+  top: 18%;
+  padding: 20px;
+}
+
+h1 {
+  color: #ff4d6d;
+  text-shadow: 0 0 10px rgba(255,77,109,0.5);
+}
+
+#text {
+  font-size: 18px;
+  color: #333;
+  min-height: 80px;
+}
+
+button {
+  margin-top: 15px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  background: #ff4d6d;
+  color: white;
+  font-size: 16px;
+}
+
+/* Final message */
+#finalMsg {
+  opacity: 0;
+  transition: opacity 2s;
+}
+
+/* Hearts */
+.heart {
+  position: absolute;
+  color: #ff4d6d;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(100vh); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(-10vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Music -->
+<audio id="bgMusic" loop>
+  <source src="your-music.mp3" type="audio/mp3">
+</audio>
+
+<div class="container">
+  <h1>Hey... ❤️</h1>
+  <div id="text"></div>
+
+  <button onclick="startExperience()">Tap to start 💗</button>
+
+  <div id="finalMsg">
+    <p>MEIN NHI CHAHTA TUM BEFALTU SAD HO…</p>
+    <p>We both are learning so why be sad bacha.</p>
+    <p>You mean a lot to me… truly.</p>
+    <p>I’m really sorry… and I just want us to be okay again ❤️</p>
+    <p>I want to take care of you for whole my life </p>
+    <p>And is chij se tu picha nhi chordwa sakti hehehe</p>
+    <p><b> I LOVE YOU ALLU</b></p>
+  </div>
+</div>
+
+<script>
+const lines = [
+  "I become silly kid aorund you...",
+  "And I’ve been thinking about it... but we can't do anything about this",
+  "About you… and us…",
+  "I don’t like seeing you upset...",
+  "And I don’t want you to feel guilty either...",
+  "If something went wrong… I take my part in it too.",
+  "Because what we have matters more to me..."
+];
+
+let lineIndex = 0;
+let charIndex = 0;
+
+function typeLine() {
+  if (lineIndex < lines.length) {
+    if (charIndex < lines[lineIndex].length) {
+      document.getElementById("text").innerHTML += lines[lineIndex].charAt(charIndex);
+      charIndex++;
+      setTimeout(typeLine, 40);
+    } else {
+      document.getElementById("text").innerHTML += "<br><br>";
+      lineIndex++;
+      charIndex = 0;
+      setTimeout(typeLine, 800);
+    }
+  } else {
+    showFinal();
+  }
+}
+
+function showFinal() {
+  document.getElementById("finalMsg").style.opacity = 1;
+}
+
+function startExperience() {
+  document.getElementById("bgMusic").play();
+  document.querySelector("button").style.display = "none";
+  typeLine();
+}
+
+// Hearts
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (10 + Math.random() * 20) + "px";
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 6000);
+}
+
+setInterval(createHeart, 300);
+</script>
+
+</body>
+</html>
